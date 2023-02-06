@@ -1,0 +1,76 @@
+ <ion-card >
+    <p class="ion-text-center">
+      <strong>
+        Selecciona tus Asientos
+      </strong> 
+    </p>
+    <p>Tarifa Individual: $ {{tarifa}}</p>
+
+<!--   <ion-grid>
+    <ion-row class="ion-justify-content-center" style="padding-bottom: 50px;">
+      <ion-col  style="margin-bottom: 55px" *ngFor="let item of arrayAsientosInfo; let i= index" size="3" >
+        <ion-fab [activated]="isOpened"  [ngClass]="{'desocupado':item.estado==='D','ocupado':item.estado==='O'}">
+          <ion-fab-button (onClick)="fabToggled()">
+            
+          </ion-fab-button>
+        </ion-fab>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+
+<!--   <ion-grid>
+    <form (ngSubmit)="reservar( fReserva )" #fReserva="ngForm">
+    <ion-row class="ion-justify-content-center">
+      <ion-col  style="margin-bottom: 55px" *ngFor="let item of arrayAsientosInfo; let i= index" size="3" >
+        <div *ngIf="item.estado === 'D'">
+          <ion-checkbox slot="start" (ngModel)="item.id_Asiento" (ionChange)="verAsientos(item.id_Asiento ,$event)" > </ion-checkbox>
+        </div>
+        <div *ngIf="item.estado === 'O'">
+          <ion-checkbox slot="start" disabled="true"> </ion-checkbox>
+        </div>
+        <strong>{{item.detalle}}</strong> 
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit">Reservar</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-grid> -->
+
+  <ion-grid>
+    <form (ngSubmit)="reservar( fReserva )" #fReserva="ngForm">
+    <ion-row>
+      <ion-col  *ngFor="let item of arrayAsientosInfo; let i= index"  size="3">
+
+        <div *ngIf="item.estado === 'D'">
+          <label><input type="checkbox" [name]="'numeroAsiento_'+(i+1)" [(ngModel)]="item.id_Asiento" ><span class="label">
+            <ion-icon src="assets/img/chair.svg"></ion-icon>
+          </span></label>
+        </div>
+
+        <div *ngIf="item.estado === 'O'">
+          <label><input type="checkbox" checked disabled ><span class="label">
+            <ion-icon src="assets/img/chair.svg"></ion-icon>
+          </span></label>
+        </div>
+
+        
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-button type="submit" color="tertiary" shape="round">
+          Reservar
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <h1>Total: $</h1>
+      </ion-col>
+    </ion-row>
+  </form>
+  </ion-grid>
+ </ion-card>

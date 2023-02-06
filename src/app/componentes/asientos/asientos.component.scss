@@ -1,0 +1,31 @@
+/* .desocupado{
+   ion-checkbox  {
+    --background-checked: #60f376;;
+      }
+    } 
+
+
+.ocupado{
+   ion-checkbox  {
+    --background-checked: #f33949;  
+    } 
+} */
+
+input[type=checkbox] {
+    display: none;
+}
+
+.label {
+    font-size: 3rem;
+    display: inline-block;
+    padding: 3px;
+    color: var(--ion-color-success);
+}
+
+input[type=checkbox]:checked+.label {
+    color: var(--ion-color-warning);
+}
+
+input[type=checkbox]:disabled+.label {
+    color: var(--ion-color-danger);
+}

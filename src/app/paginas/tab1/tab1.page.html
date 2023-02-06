@@ -1,0 +1,97 @@
+<ion-content>
+    <div class="header-bg">
+        <ion-slides>
+            <ion-slide>
+                <h1 class="logo">Hola 
+                    <span> 
+                        <strong>
+                            {{nombre}}
+                        </strong> 
+                    </span>
+                    , A donde quieres ir?</h1>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+    <ion-card>
+        <form #formulario="ngForm" (ngSubmit)="buscarPasajes()">
+            <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                    <ion-item  color="transparent" class="form-control"  style="margin-top: 25px;">
+                        <ion-icon  slot="start" class="icon-field" name="locate" color="success"></ion-icon>
+                        <ion-select interface="action-sheet" [(ngModel)]="objReserva.origen" [ngModelOptions]="{standalone: true}" placeholder="Seleccione Origen">
+                            <ion-select-option *ngFor="let item of ciudades"  [value]=item.id_ciudad >
+                                {{item.detalle}}
+                              </ion-select-option>
+                        </ion-select>
+                        <!--   <ion-label position="floating">Origen</ion-label> -->
+                        <!--     <ion-input placeholder="Ingrese Origen" [(ngModel)]="objReserva.origen" name="origen"></ion-input> -->
+                    </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-item  color="transparent" class="form-control"  style="margin-top: 25px;">
+                        <ion-icon  slot="start" class="icon-field" name="locate" color="danger"></ion-icon>
+                        <ion-select interface="action-sheet" [(ngModel)]="objReserva.destino" [ngModelOptions]="{standalone: true}" placeholder="Seleccione Destino">
+                            <ion-select-option *ngFor="let item of ciudades"  [value]=item.id_ciudad >
+                                {{item.detalle}}
+                              </ion-select-option>
+                        </ion-select>
+                        <!-- <ion-label position="floating">Destino</ion-label> -->
+                        <!-- <ion-input placeholder="Ingrese Destino" [(ngModel)]="objReserva.destino" name="destino" ></ion-input> -->
+                      </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-item button="true" id="open-date-input" style="margin-top: 25px;">
+                        <ion-icon  slot="start" class="icon-field" name="calendar-sharp" color="medium"></ion-icon>
+                        <ion-text slot="end">{{ objReserva.fecha }} &nbsp; {{objReserva.hora}}</ion-text>
+                        <ion-popover trigger="open-date-input" show-backdrop="false">
+                          <ng-template>
+                            <ion-datetime
+                            (ionChange)="cambioFecha($event)"
+                            ></ion-datetime>
+                          </ng-template>
+                        </ion-popover>
+                       </ion-item>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                    <ion-button type="submit" color="tertiary" shape="round" class="ion-align-center" (click)="buscarPasajes()">
+                        Buscar Pasajes Disponibles
+                    </ion-button>
+                </ion-row>
+            </ion-grid>
+            <div class="contenedor">
+                <ion-button fill="clear">
+                    <ion-icon  color="warning" name="swap-vertical-sharp"></ion-icon>
+                </ion-button>
+            </div>
+        </form>
+    </ion-card>
+
+    <ion-card  *ngIf="viajes.length === 0">
+        <h1>
+            <strong>
+                No hay Viajes Disponibles
+            </strong> 
+        </h1>
+    </ion-card>
+
+     
+   <ion-card  *ngIf="viajes.length !== 0"  > 
+    <ion-list>
+        <ion-item button lines="none" *ngFor="let item of viajes" (click)="abrirModal()" >
+            <ion-thumbnail slot="start">
+              <img alt=""  src="/assets/img/{{item.imagen }}" />
+            </ion-thumbnail>
+            <ion-label>
+                <h2>{{ item.t_salida }} - {{ item.t_llegada }}</h2>
+                <p>{{item.hora}} - {{item.capacidad}} asientos</p>
+                <h3>{{ item.alias }}</h3>
+                <p>Disco: <strong>{{ item.disco }}</strong></p>
+                <h3>Tarifa: <strong> ${{item.tarifa}}</strong></h3>
+              </ion-label>
+          </ion-item>
+    </ion-list>
+        
+          
+    </ion-card>
+</ion-content>
