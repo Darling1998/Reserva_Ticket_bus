@@ -6,7 +6,8 @@ import { LoadingController, ToastController } from '@ionic/angular';
 })
 export class UtilsService {
 
-  public URL_API= "http://localhost/API-PROYECTO/";
+  public URL_API= "https://proyectoreservacionbus.000webhostapp.com/";
+  
 
   constructor(private toast :ToastController,private loadingCtrl:LoadingController) { }
 

@@ -21,7 +21,9 @@
 
                 <ion-item>
                   <ion-label>Password</ion-label>
-                  <ion-input name="password" type="password" [(ngModel)]="loginUser.password" required></ion-input>
+                  <ion-input  [type]="showPassword ? 'text': 'password'" name="password" inputmode="text" [(ngModel)]="loginUser.password" required></ion-input>
+                  <ion-icon class="ion-align-self-center" slot="end" [name]="passwordToggleIcon"
+                  (click)="togglePassword()"></ion-icon>
                 </ion-item>
               </ion-list>
             </ion-col>
@@ -40,6 +42,14 @@
 
     <ion-slide>
       <ion-grid fixed>
+        <ion-row class="ion-justify-content-center">
+          <ion-label>Registro</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-icon name="bus-outline" color="tertiary"></ion-icon>
+          </ion-col>
+        </ion-row>
         <form (ngSubmit)="registro( fRegistro )" #fRegistro="ngForm">
           <ion-row>
             <ion-col>
@@ -61,7 +71,9 @@
 
                 <ion-item>
                   <ion-label>Password: </ion-label>
-                  <ion-input name="password" type="password" [(ngModel)]="registerUser.password" required></ion-input>
+                  <ion-input   [type]="showPassword ? 'text': 'password'" name="password" inputmode="text"  [(ngModel)]="registerUser.password" required></ion-input>
+                  <ion-icon class="ion-align-self-center" slot="end" [name]="passwordToggleIcon"
+                  (click)="togglePassword()"></ion-icon>
                 </ion-item>
               </ion-list>
             </ion-col>

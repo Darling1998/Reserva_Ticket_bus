@@ -59,26 +59,26 @@
                     </ion-button>
                 </ion-row>
             </ion-grid>
-            <div class="contenedor">
+           <!--  <div class="contenedor">
                 <ion-button fill="clear">
                     <ion-icon  color="warning" name="swap-vertical-sharp"></ion-icon>
                 </ion-button>
-            </div>
+            </div> -->
         </form>
     </ion-card>
 
     <ion-card  *ngIf="viajes.length === 0">
         <h1>
             <strong>
-                No hay Viajes Disponibles
+              
             </strong> 
         </h1>
     </ion-card>
 
      
    <ion-card  *ngIf="viajes.length !== 0"  > 
-    <ion-list>
-        <ion-item button lines="none" *ngFor="let item of viajes" (click)="abrirModal()" >
+    <ion-list *ngFor="let item of viajes">
+        <ion-item button  (click)="abrirModal( item.id_viaje,item.id_bus,item.tarifa)" >
             <ion-thumbnail slot="start">
               <img alt=""  src="/assets/img/{{item.imagen }}" />
             </ion-thumbnail>

@@ -1,0 +1,48 @@
+
+<div class="l-col-right ticket-wrap" *ngFor="let item of info">
+  <div class="ticket" aria-hidden="true">
+    <div class="ticket__header">
+      <div class="ticket__co">
+        <span class="ticket__co-name">{{item.compania}}</span>
+        <span class="u-upper ticket__co-subname">{{item.alias}}</span>
+      </div>
+    </div>
+    <div class="ticket__body">
+      <div class="ticket__timing">
+        <p>
+          <span class="u-upper ticket__small-label">BUS#</span>
+          <span class="ticket__detail">{{item.disco}}</span>
+        </p>
+          <span class="u-upper ticket__small-label">ASIENTOS: </span> <br>
+          <div *ngFor="let x of asientos">
+            <span class="ticket__detail">{{x.id_asiento}}, </span>
+          </div>
+
+      </div>
+      <div class="ticket__timing">
+        <p>
+          <span class="u-upper ticket__small-label">Fecha</span>
+          <span class="ticket__detail">{{item.fecha}}</span>
+        </p>
+        <p>
+          <span class="u-upper ticket__small-label">Hora</span>
+          <span class="ticket__detail">{{item.hora}}</span>
+        </p>
+        <p>
+          <span class="u-upper ticket__small-label">Destino</span>
+          <span class="ticket__detail">{{item.destino}}</span>
+        </p>
+      </div>
+      <div class="ticket__timing">
+        <p class="ticket__fine-print">CI: {{cedula}}</p>
+        <p class="ticket__fine-print">NOMBRE: {{nombre}} {{apellido}}</p>
+      </div>
+      <div class="ticket__timing">
+        <h1>Costo Total Pasaje $ {{calcularTotal()}}</h1>
+      </div>
+      <div class="div_b">
+        <qr-code value={{informacionqr}} size="300" errorCorrectionLevel="M"></qr-code>
+      </div>
+    </div>
+  </div>
+</div>

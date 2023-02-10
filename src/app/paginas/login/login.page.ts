@@ -26,6 +26,9 @@ export class LoginPage {
     cedula: '',
   };
 
+  showPassword = false;
+  passwordToggleIcon = 'eye-off-outline';
+
   constructor(
     private navCtrl: NavController,
     private serLogin: LoginService,
@@ -106,4 +109,16 @@ export class LoginPage {
     this.slides.slideTo(1);
     this.slides.lockSwipes(true);
   }
+
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+    if (this.passwordToggleIcon == 'eye-off-outline') {
+      this.passwordToggleIcon = 'eye-outline';
+    } else {
+      this.passwordToggleIcon = 'eye-off-outline';
+    }
+  }
+
+
 }

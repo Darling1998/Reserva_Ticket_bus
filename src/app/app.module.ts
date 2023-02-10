@@ -8,11 +8,12 @@ import { SwiperModule } from 'swiper/angular';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AsientosModule } from './componentes/asientos/asientos.module';
+import { TicketModule } from './componentes/ticket/ticket.module';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,SwiperModule,HttpClientModule,AsientosModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,SwiperModule,HttpClientModule,AsientosModule,TicketModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

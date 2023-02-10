@@ -1,0 +1,84 @@
+
+.ticket-wrap {
+	text-align: center;
+}
+
+.ticket {
+	display: inline-block;
+	margin: 0 auto;
+	border: 2px solid #9facbc;
+	font-family: "Variable Bahnschrift", "FF DIN", "Franklin Gothic", "Helvetica Neue", sans-serif;
+	font-feature-settings: "kern" 1;
+	background: #fff;
+}
+
+.ticket__header {
+	margin: 0;
+	padding: 1em;
+	background: #f4f5f6;
+}
+
+.ticket__co span,
+.ticket__route span {
+	display: block;
+}
+
+
+.ticket__co-name {
+	font-size: 1em;
+	font-variation-settings: "wght" 500, "wdth" 75;
+	letter-spacing: -.01em;
+}
+
+.ticket__co-subname {
+	font-variation-settings: "wght" 700;
+	color: #506072;
+}
+
+.ticket__body {
+	padding: 2rem 1.25em 1.25em;
+}
+
+.ticket__timing {
+	display: flex;
+	align-items: center;
+	margin-top: 1rem;
+	padding: 1rem 0;
+	border-top: 2px solid #9facbc;
+	border-bottom: 2px solid #9facbc;
+	text-align: left;
+}
+
+.ticket__timing p {
+	margin: 0 1rem 0 0;
+	padding-right: 1rem;
+	border-right: 2px solid #9facbc;
+	line-height: 1;
+}
+
+.ticket__timing p:last-child {
+	margin: 0;
+	padding: 0;
+	border-right: 0;
+}
+
+.ticket__small-label {
+	display: block;
+	margin-bottom: .5em;
+	font-variation-settings: "wght" 300;
+	font-size: .875em;
+	color: #506072;
+}
+
+.ticket__detail {
+	font-variation-settings: "wght" 700;
+	font-size: 1.25em;
+	color: #424f5e;
+}
+
+
+.ticket__fine-print {
+	margin-top: 1rem;
+	font-variation-settings: "wdth" 75;
+	color: #666;
+}

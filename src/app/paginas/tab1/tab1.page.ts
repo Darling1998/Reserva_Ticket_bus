@@ -58,7 +58,7 @@ export class Tab1Page implements OnInit{
   }
 
   buscarPasajes(){
-    if(this.objReserva.origen != this.objReserva.destino){
+    if( this.objReserva.origen===0 || this.objReserva.destino ===0 || this.objReserva.origen != this.objReserva.destino){
       console.log(this.objReserva);
       
       this.serUtil.mostrarLoading();
@@ -67,8 +67,8 @@ export class Tab1Page implements OnInit{
            if(resp.id == 0){
             this.serUtil.mostrarMessage(resp.mensaje, "danger");
           } else {
-            console.log(this.viajes);
             this.viajes=resp.data.info;
+            console.log(this.viajes);
           } 
         },  
       )   
@@ -79,22 +79,26 @@ export class Tab1Page implements OnInit{
     
   }
 
- async abrirModal(){
+ async abrirModal(id_viaje:any,id_bus:any,tarifa:any){
     const modal = await this.modalCtrl.create({
       component: AsientosComponent,
-      componentProps:{
-        asientos:this.viajes
-      },cssClass:'modalAsientos'
+      componentProps: {
+       id_viaje:id_viaje,
+       id_bus:id_bus,
+       tarifa:tarifa
+      },
+      cssClass: 'modalAsientos',
     });
     modal.present();
 
-    const { data, role } = await modal.onWillDismiss();
+    const { data, role } = await modal.onDidDismiss();
 
     if (role === 'confirm') {
       console.log(data);
-      
     }
   }
+
+
 
   
 

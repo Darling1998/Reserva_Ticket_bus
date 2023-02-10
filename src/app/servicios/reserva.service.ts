@@ -22,12 +22,27 @@ export class ReservaService {
   }
 
   getAsientos(id_bus:any){
-    console.log(id_bus);
-    
     const URL =  this.serUtil.URL_API  + "asientos/" + id_bus;
     return this.http.get<any>(URL);
   }
 
+
+  getReservas(id_usuario:any){
+    const URL =  this.serUtil.URL_API  + "reservas/" + id_usuario;
+    return this.http.get<any>(URL);
+  }
+
+  getInfoReservaInd(id_usuario:any,id_viaje:number){
+    const URL =  this.serUtil.URL_API  + "reservasInd/" + id_usuario +"/"+id_viaje;
+    return this.http.get<any>(URL);
+  }
+
+  getInfoAsientos(id_usuario:any,id_horario:any){
+    console.log(id_horario,id_usuario);
+    
+    const URL =  this.serUtil.URL_API  + "reservasAsientos/" + id_usuario+"/"+id_horario;
+    return this.http.get<any>(URL);
+  }
   postReservar(data: any){
     console.log(data); 
     const URL = this.serUtil.URL_API + 'reservar';

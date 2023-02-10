@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { ReservaService } from 'src/app/servicios/reserva.service';
 import { StorageService } from 'src/app/servicios/storage.service';
 import * as moment from 'moment';
+import { UtilsService } from 'src/app/servicios/utils.service';
+import {  ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-asientos',
@@ -10,33 +12,25 @@ import * as moment from 'moment';
   styleUrls: ['./asientos.component.scss'],
 })
 export class AsientosComponent implements OnInit {
-  numeroAsientos:number; //numero de asientos totales
-  filas:number;           //numero de filas del bus con respecto al numero de asientos
-  ultimosAsientos:number; //ultimos asientos
-  id_bus:number;   
-  id_horario:number;       //id_bus
-  @Input() asientos: any;
-  tarifa:number;
 
+  id_horario:number;      
+  @Input() id_viaje: any;
+  @Input() id_bus: any;
+  @Input() tarifa: any;
   array:any[];
   arrayUltimosAsientos:any[];
   arrayAsientosInfo:any[]=[];
+  aux:number;
 
-
-  constructor(private servR:ReservaService,private serStorage:StorageService) { }
-
+  constructor(
+    private servR:ReservaService,
+    private serStorage:StorageService,
+    private serU:UtilsService,
+    private modalCtrl:ModalController,
+  ) { }
 
   ngOnInit() {
-    this.id_bus=this.asientos[0].id_bus;
-    this.id_horario=this.asientos[0].id_viaje;
-    this.tarifa=this.asientos[0].tarifa;
-    console.log(this.asientos[0]);
-/*     console.log(this.asientos[0].id_bus);
-    this.numeroAsientos=this.asientos[0].capacidad;
-    this.filas= this.numeroAsientos/4; //se divide para 4 por son 2 asientos por 2 columnas en un bus
-    this.ultimosAsientos= this.numeroAsientos%4;
-    this.array = Array(Math.trunc(this.filas)  ).fill(Array(4).fill(0));  
-    this.arrayUltimosAsientos = Array(this.ultimosAsientos ).fill(Array(4).fill(0)); */
+    //this.id_bus
     this.cargarAsientos();
   }
 
@@ -51,25 +45,19 @@ export class AsientosComponent implements OnInit {
   }
 
   reservar(fReserva: NgForm){
-    let numeroAsientos = [];
-    //console.log(fReserva.form.value); //numeros Asientos del Formulario
+    let numeroAsientos = []; //numero Asientos seleccionados
     for (var key in fReserva.form.value) {
-      //console.log(key);                     //obtengo la propiedad
-      //console.log(fReserva.form.value[key]); //obtengo el valor
       if(fReserva.form.value[key]===false){
-        let string=key;                       //Obtengo el numero de Asiento
+        let string=key;             //Obtengo el numero de Asiento
         numeroAsientos.push({'idAsiento':string.replace(/[^0-9]+/g, "")});
       }
     }    
     console.log(numeroAsientos);
-    //Guardar Reserva
 
     let fecha= new Date();
-
-    
     let infoReserva={
       idAsientos:numeroAsientos,
-      idHorario:this.id_horario,
+      idHorario:this.id_viaje,
       idUsuario:this.serStorage.get("user").id_usuario,
       tarifa:this.tarifa,
       monto: this.tarifa*(numeroAsientos.length),
@@ -77,15 +65,24 @@ export class AsientosComponent implements OnInit {
       idBus:this.id_bus,
     }
    
-    console.log(infoReserva);
+    if(numeroAsientos.length ===0){
+      this.serU.mostrarMessage("Seleccione asientos","warning");
+    }else{
+      this.servR.postReservar(infoReserva).subscribe(
+        res=>{
+          this.serU.mostrarMessage("Asientos Reservados Correctamente")
+          this.modalCtrl.dismiss({
+            message:"Revisa tus reservas"
+          });
+        }
+      );
+    }
     
-     this.servR.postReservar(infoReserva).subscribe(
-      res=>{
-        console.log(res);
-      }
-    ) 
-  }
+    }
 
 
+    cancelar(){
+      this.modalCtrl.dismiss();
+    }
 
 }
